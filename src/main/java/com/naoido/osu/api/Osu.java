@@ -1,10 +1,5 @@
 package com.naoido.osu.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.naoido.osu.user.User;
-import com.naoido.osu.beatmap.Beatmap;
-import com.naoido.osu.user.UserBeatmapScore;
 import com.naoido.osu.util.Parameter;
 import com.naoido.osu.util.HttpConnection;
 

@@ -2,7 +2,6 @@ package com.naoido.osu.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.naoido.osu.user.statistics.UserStatistics;
 
 import java.util.List;
@@ -73,7 +72,7 @@ public class User {
     private String[] accountHistory;
     @JsonProperty("active_tournament_banner")
     private String activeTournamentBanner;
-    private Badges badges;
+    private List<Badge> badges;
     @JsonProperty("favourite_beatmapset_count")
     private int favouriteBeatmapSetCount;
     @JsonProperty("follower_count")
@@ -88,11 +87,11 @@ public class User {
     private int guestBeatmapSetCount;
     @JsonProperty("mapping_follower_count")
     private int mappingFollowerCount;
-    private Groups groups;
+    private List<Group> groups;
     @JsonProperty("loved_beatmapset_count")
     private int lovedBeatmapSetCount;
     @JsonProperty("monthly_playcounts")
-    private Counts monthlyPlayCount;
+    private List<Count> monthlyPlayCount;
     private Page page;
     @JsonProperty("previous_usernames")
     private String[] previousUserNames;
@@ -105,7 +104,7 @@ public class User {
     @JsonProperty("ranked_beatmapset_count")
     private int rankedBeatmapSetCount;
     @JsonProperty("replays_watched_counts")
-    private Counts replaysWatchedCounts;
+    private List<Count> replaysWatchedCounts;
     @JsonProperty("scores_first_count")
     private int scoresFirstCount;
     @JsonProperty("scores_pinned_count")
@@ -266,7 +265,7 @@ public class User {
         return this.activeTournamentBanner;
     }
 
-    public Badges getBadges() {
+    public List<Badge> getBadges() {
         return this.badges;
     }
 
@@ -287,7 +286,7 @@ public class User {
         return this.rankedBeatmapSetCount;
     }
 
-    public Groups getGroups() {
+    public List<Group> getGroups() {
         return this.groups;
     }
 
@@ -295,7 +294,7 @@ public class User {
         return this.lovedBeatmapSetCount;
     }
 
-    public Counts getMonthlyPlayCount() {
+    public List<Count> getMonthlyPlayCount() {
         return this.monthlyPlayCount;
     }
 
@@ -311,7 +310,7 @@ public class User {
         this.rankedBeatmapSetCount = rankedBeatmapSetCount;
     }
 
-    public Counts getReplaysWatchedCounts() {
+    public List<Count> getReplaysWatchedCounts() {
         return this.replaysWatchedCounts;
     }
 
