@@ -1,29 +1,30 @@
 package com.naoido.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.naoido.osu.beatmap.Beatmap;
-import com.naoido.osu.user.*;
-
-import com.naoido.osu.api.OsuApiResponse;
-import com.naoido.osu.Exception.OsuException;
-import com.naoido.osu.api.Osu;
-import com.naoido.osu.api.OsuBuilder;
-import com.naoido.osu.user.statistics.UserStatistics;
+import com.naoido.osu4j.OsuApiClient;
+import com.naoido.osu4j.model.beatmap.Beatmap;
+import com.naoido.osu4j.model.beatmap.BeatmapSet;
+import com.naoido.osu4j.model.user.Score;
+import com.naoido.osu4j.model.user.User;
+import com.naoido.osu4j.model.user.UserBeatmapScore;
+import com.naoido.osu4j.model.user.statistics.Statistics;
+import com.naoido.osu4j.util.Parameter;
 
 import java.util.Map;
 
-import static com.naoido.example.Token.CLIENT_ID;
-import static com.naoido.example.Token.CLIENT_SECRET;
+import static com.naoido.example.Client.CLIENT_ID;
+import static com.naoido.example.Client.CLIENT_SECRET;
 
 public class Example {
 
+    public static void main(String[] args) throws JsonProcessingException {
+        //Build OsuApiClient
+        OsuApiClient osuApiClient = new OsuApiClient.Builder(CLIENT_ID, CLIENT_SECRET).build();
 
-    public static void main(String[] args) throws OsuException, JsonProcessingException {
-        Osu osu = new OsuBuilder(CLIENT_ID, CLIENT_SECRET).build();
+        System.out.println("BeatmapScoreUser-----");
 
-        System.out.println("---------------");
-
-        UserBeatmapScore userBeatmapScore = osu.getUserBeatmapScore(2480902, 9144414).getUserBeatmapScore();
+        //GET(https://osu.ppy.sh/api/v2/beatmaps/{beatmapID}/scores/users/{userID})
+        UserBeatmapScore userBeatmapScore = osuApiClient.getUserBeatmapScore(2480902, 9144414);
 
         User naoido = userBeatmapScore.getUser();
         Score score = userBeatmapScore.getScore();
@@ -31,23 +32,36 @@ public class Example {
         System.out.println("iconURL: " + naoido.getAvatarUrl());
         System.out.println("Score: " + score.getScore());
         System.out.println("PP: " + score.getPerformancePoint());
+        System.out.println("BPM: " + beatmap.getBPM());
         System.out.println("BeatmapURL: " + beatmap.getUrl());
 
-        System.out.println("---------------");
+        System.out.println("\nUser----------------");
 
-        OsuApiResponse res = osu.getUser("Naoido");
-        User user = res.getUser();
-        UserStatistics statistics = user.getStatistics();
+        //GET(https://osu.ppy.sh/api/v2/users/{userID})
+        User user = osuApiClient.getUser("Naoido");
+        Statistics statistics = user.getStatistics();
 
         System.out.println("Name: " + user.getUserName());
         System.out.println("PP: " + statistics.getPerformancePoint());
         System.out.println("GlobalRank: " + statistics.getGlobalRank());
         System.out.println("CountryRank: " + statistics.getCountryRank());
 
-        for (Map.Entry<String, Integer> rank: statistics.getGradeCounts().getTreeMap().entrySet()) {
+        for (Map.Entry<String, Integer> rank : statistics.getGradeCounts().getTreeMap().entrySet()) {
             System.out.println(rank.getKey() + ": " + rank.getValue());
         }
 
-        System.out.println("---------------");
+        System.out.println("\nBeatmap-------------");
+
+        //GET(https://osu.ppy.sh/api/v2/beatmaps/lookup?{checksum? filename? id?})
+        Beatmap lookupBeatmap = osuApiClient.getLookupBeatMap(Parameter.of("id", 1033882));
+        BeatmapSet beatmapSet = lookupBeatmap.getBeatmapSet();
+
+        System.out.println("BeatmapNameUnicode: " + beatmapSet.getTitleUnicode());
+        System.out.println("BeatmapCreator: " + beatmapSet.getCreator());
+        System.out.println("MusicArtist: " + beatmapSet.getArtist());
+        System.out.println("BPM: " + lookupBeatmap.getBPM());
+        System.out.println("BeatmapURL: " + lookupBeatmap.getUrl());
+
+        System.out.println("--------------------");
     }
 }

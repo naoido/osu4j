@@ -1,10 +1,10 @@
-package com.naoido.osu.beatmap;
+package com.naoido.osu4j.model.beatmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
-public class BeatmapStatistics {
+public class Statistics {
     @JsonProperty("count_100")
     private int count100;
     @JsonProperty("count_300")
@@ -18,7 +18,7 @@ public class BeatmapStatistics {
     @JsonProperty("count_miss")
     private int countMiss;
 
-    public BeatmapStatistics() {}
+    public Statistics() {}
 
     public int getCount100() {
         return count100;

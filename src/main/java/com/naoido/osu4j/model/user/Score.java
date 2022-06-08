@@ -1,8 +1,8 @@
-package com.naoido.osu.user;
+package com.naoido.osu4j.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.naoido.osu.beatmap.Beatmap;
-import com.naoido.osu.beatmap.BeatmapStatistics;
+import com.naoido.osu4j.model.beatmap.Beatmap;
+import com.naoido.osu4j.model.beatmap.Statistics;
 
 public class Score {
     private double accuracy;
@@ -26,16 +26,17 @@ public class Score {
     private String rank;
     private boolean replay;
     private long score;
-    private BeatmapStatistics statistics;
+    private Statistics statistics;
     private Beatmap beatmap;
     private User user;
     @JsonProperty("current_user_attributes")
     private CurrentUserAttributes currentUserAttributes;
 
-    public Score() {}
+    public Score() {
+    }
 
     public double getAccuracy() {
-        return Math.floor(this.accuracy * 10000) / 100;
+        return Math.floor(this.accuracy * 10000.0) / 100.0;
     }
 
     public long getBestID() {
@@ -90,7 +91,7 @@ public class Score {
         return this.score;
     }
 
-    public BeatmapStatistics getStatistics() {
+    public Statistics getStatistics() {
         return this.statistics;
     }
 

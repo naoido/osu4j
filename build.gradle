@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group 'com.naoido'
+
+version '0.2-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+}

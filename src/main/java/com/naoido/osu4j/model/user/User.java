@@ -1,12 +1,12 @@
-package com.naoido.osu.user;
+package com.naoido.osu4j.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.naoido.osu.user.statistics.UserStatistics;
+import com.naoido.osu4j.model.user.statistics.Statistics;
 
 import java.util.List;
 
-@JsonIgnoreProperties("rankHistory")
+@JsonIgnoreProperties({"rankHistory"})
 public class User {
     @JsonProperty("avatar_url")
     private String avatarUrl;
@@ -111,7 +111,7 @@ public class User {
     private int scoresPinnedCount;
     @JsonProperty("scores_recent_count")
     private int scoresRecentCount;
-    private UserStatistics statistics;
+    private Statistics statistics;
     @JsonProperty("support_level")
     private int supportLevel;
     @JsonProperty("user_achievements")
@@ -123,10 +123,11 @@ public class User {
     @JsonProperty("unranked_beatmapset_count")
     private int unrankedBeatmapCount;
 
-    public User() {}
+    public User() {
+    }
 
     public String getAvatarUrl() {
-        return avatarUrl;
+        return this.avatarUrl;
     }
 
     public String getCountryCode() {
@@ -277,7 +278,6 @@ public class User {
         return this.followerCount;
     }
 
-
     public int getGraveyardBeatmapSetCount() {
         return this.graveyardBeatmapSetCount;
     }
@@ -318,7 +318,7 @@ public class User {
         return this.scoresFirstCount;
     }
 
-    public UserStatistics getStatistics() {
+    public Statistics getStatistics() {
         return this.statistics;
     }
 

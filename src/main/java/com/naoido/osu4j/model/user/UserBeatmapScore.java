@@ -1,12 +1,13 @@
-package com.naoido.osu.user;
+package com.naoido.osu4j.model.user;
 
-import com.naoido.osu.beatmap.Beatmap;
+import com.naoido.osu4j.model.beatmap.Beatmap;
 
 public class UserBeatmapScore {
     private long position;
     private Score score;
 
-    public UserBeatmapScore() {}
+    public UserBeatmapScore() {
+    }
 
     public long getPosition() {
         return this.position;
