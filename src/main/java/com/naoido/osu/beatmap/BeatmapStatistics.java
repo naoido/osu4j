@@ -1,41 +1,24 @@
 package com.naoido.osu.beatmap;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 
 public class BeatmapStatistics {
-    private final JsonNode json;
+    @JsonProperty("count_100")
     private int count100;
+    @JsonProperty("count_300")
     private int count300;
+    @JsonProperty("count_50")
     private int count50;
+    @JsonProperty("count_geki")
     private int countGeki;
+    @JsonProperty("count_katu")
     private int countKatu;
+    @JsonProperty("count_miss")
     private int countMiss;
 
-    public BeatmapStatistics(JsonNode json) {
-        this.json = json;
-    }
-
-    public BeatmapStatistics(String json) throws JsonProcessingException {
-        this.json = new ObjectMapper().readTree(json);
-        this.build();
-    }
-
-    public JsonNode getResponse() {
-        return this.json;
-    }
-
-    private void build() {
-        this.count300 = json.path("count_300").asInt();
-        this.count100 = json.path("count_100").asInt();
-        this.count50 = json.path("count_50").asInt();
-        this.countGeki = json.path("count_geki").asInt();
-        this.countKatu = json.path("count_katu").asInt();
-        this.countMiss = json.path("count_miss").asInt();
-    }
+    public BeatmapStatistics() {}
 
     public int getCount100() {
         return count100;
