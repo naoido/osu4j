@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.naoido.osu4j.model.beatmap.Beatmap;
 import com.naoido.osu4j.model.beatmap.Statistics;
 
+import java.util.List;
+
 public class Score {
     private double accuracy;
     @JsonProperty("best_id")
@@ -109,5 +111,15 @@ public class Score {
 
     public CurrentUserAttributes getCurrentUserAttributes() {
         return this.currentUserAttributes;
+    }
+
+    public static class Scores {
+        private List<Score> scores;
+
+        public Scores() {}
+
+        public List<Score> getScores() {
+            return this.scores;
+        }
     }
 }

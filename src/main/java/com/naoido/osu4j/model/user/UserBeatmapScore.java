@@ -2,9 +2,12 @@ package com.naoido.osu4j.model.user;
 
 import com.naoido.osu4j.model.beatmap.Beatmap;
 
+import java.util.List;
+
 public class UserBeatmapScore {
     private long position;
     private Score score;
+    private List<Score> scores;
 
     public UserBeatmapScore() {
     }
@@ -24,4 +27,5 @@ public class UserBeatmapScore {
     public User getUser() {
         return this.score.getUser();
     }
+
 }

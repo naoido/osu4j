@@ -2,6 +2,8 @@ package com.naoido.osu4j.model.beatmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Beatmap {
     @JsonProperty("beatmapset_id")
     private long beatmapSetID;
@@ -173,5 +175,15 @@ public class Beatmap {
 
     public int getMaxCombo() {
         return this.maxCombo;
+    }
+
+    public static class Beatmaps {
+        private List<Beatmap> beatmaps;
+
+        public Beatmaps() {}
+
+        public List<Beatmap> getBeatmaps() {
+            return this.beatmaps;
+        }
     }
 }
