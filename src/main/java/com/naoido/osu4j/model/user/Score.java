@@ -41,6 +41,10 @@ public class Score {
         return Math.floor(this.accuracy * 10000.0) / 100.0;
     }
 
+    public double getRawAccuracy() {
+        return this.accuracy;
+    }
+
     public long getBestID() {
         return this.bestID;
     }
