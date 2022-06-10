@@ -16,7 +16,7 @@ public class GetLookupBeatmap {
         OsuApiClient osuApiClient = new OsuApiClient.Builder(CLIENT_ID, CLIENT_SECRET).build();
 
         //GET(https://osu.ppy.sh/api/v2/beatmaps/lookup?{checksum? filename? id?})
-        Beatmap lookupBeatmap = osuApiClient.getLookupBeatMap(Parameter.of("id", 1033882));
+        Beatmap lookupBeatmap = osuApiClient.getLookupBeatmap(Parameter.of("id", 1033882));
         BeatmapSet beatmapSet = lookupBeatmap.getBeatmapSet();
 
         System.out.println("----------");
