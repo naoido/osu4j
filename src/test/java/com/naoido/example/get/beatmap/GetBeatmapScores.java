@@ -23,21 +23,21 @@ class GetBeatmapScores {
         //GET(https://osu.ppy.sh/api/v2/beatmaps/{beatmapID}/scores?{mode? mods? type?})
         List<Score> userScores = osuApiClient.getBeatmapScores(beatmapId, Parameter.of(Mode.OSU));
 
-        System.out.println("----------");
+        System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());
         System.out.println("Response: " + osuApiClient.getResponse());
-        System.out.println("----------");
+        System.out.println("----------------------------");
 
         for (Score userScore: userScores) {
             User user = userScore.getUser();
 
-            System.out.println("UserName: " + user.getUserName());
-            System.out.println("Accuracy: " + userScore.getAccuracy() + "%");
-            System.out.println("Score:    " + userScore.getScore());
-            System.out.println("Rank:     " + userScore.getRank());
-            System.out.println("PP:       " + userScore.getPerformancePoint());;
+            System.out.println("UserName : " + user.getUserName());
+            System.out.println("Accuracy : " + userScore.getAccuracy() + "%");
+            System.out.println("Score    : " + userScore.getScore());
+            System.out.println("Rank     : " + userScore.getRank());
+            System.out.println("PP       : " + userScore.getPerformancePoint());;
 
-            System.out.println("----------");
+            System.out.println("----------------------------");
         }
     }
 }

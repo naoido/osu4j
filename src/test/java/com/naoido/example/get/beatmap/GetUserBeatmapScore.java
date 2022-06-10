@@ -30,17 +30,18 @@ class GetUserBeatmapScore {
         Score score = userBeatmapScore.getScore();
         Beatmap beatmap = userBeatmapScore.getBeatmap();
 
-        System.out.println("----------");
+        System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());
         System.out.println("Response: " + osuApiClient.getResponse());
-        System.out.println("----------");
+        System.out.println("----------------------------");
 
-        System.out.println("iconURL: " + naoido.getAvatarUrl());
-        System.out.println("Score: " + score.getScore());
-        System.out.println("PP: " + score.getPerformancePoint());
-        System.out.println("BPM: " + beatmap.getBPM());
-        System.out.println("BeatmapURL: " + beatmap.getUrl());
+        System.out.println("iconURL    : " + naoido.getAvatarUrl());
+        System.out.println("Score      : " + score.getScore());
+        System.out.println("PP         : " + score.getPerformancePoint());
+        System.out.println("BPM        : " + beatmap.getBPM());
+        System.out.println("BeatmapURL : " + beatmap.getUrl());
 
+        System.out.println("----------------------------");
     }
 }
 
@@ -56,19 +57,19 @@ class GetUserBeatmapScores {
         //GET(https://osu.ppy.sh/api/v2/beatmaps/{beatmapID}/scores/users/{userID}/all?{mode?})
         List<Score> userScores = osuApiClient.getUserBeatmapScores(beatmapId, userId, Parameter.of(Mode.OSU));
 
-        System.out.println("----------");
+        System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());
         System.out.println("Response: " + osuApiClient.getResponse());
-        System.out.println("----------");
+        System.out.println("----------------------------");
 
         for (Score userScore: userScores) {
 
-            System.out.println("Accuracy: " + userScore.getAccuracy() + "%");
-            System.out.println("Score: " + userScore.getScore());
-            System.out.println("Rank: " + userScore.getRank());
-            System.out.println("PP: " + userScore.getPerformancePoint());;
+            System.out.println("Accuracy : " + userScore.getAccuracy() + "%");
+            System.out.println("Score    : " + userScore.getScore());
+            System.out.println("Rank     : " + userScore.getRank());
+            System.out.println("PP       : " + userScore.getPerformancePoint());;
 
-            System.out.println("----------");
+            System.out.println("----------------------------");
         }
     }
 }

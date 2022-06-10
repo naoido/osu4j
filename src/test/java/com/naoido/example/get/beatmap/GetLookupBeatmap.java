@@ -19,15 +19,17 @@ public class GetLookupBeatmap {
         Beatmap lookupBeatmap = osuApiClient.getLookupBeatmap(Parameter.of("id", 1033882));
         BeatmapSet beatmapSet = lookupBeatmap.getBeatmapSet();
 
-        System.out.println("----------");
+        System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());
         System.out.println("Response: " + osuApiClient.getResponse());
-        System.out.println("----------");
+        System.out.println("----------------------------");
 
         System.out.println("BeatmapNameUnicode: " + beatmapSet.getTitleUnicode());
-        System.out.println("BeatmapCreator: " + beatmapSet.getCreator());
-        System.out.println("MusicArtist: " + beatmapSet.getArtist());
-        System.out.println("BPM: " + lookupBeatmap.getBPM());
-        System.out.println("BeatmapURL: " + lookupBeatmap.getUrl());
+        System.out.println("BeatmapCreator    : " + beatmapSet.getCreator());
+        System.out.println("MusicArtist       : " + beatmapSet.getArtist());
+        System.out.println("BPM               : " + lookupBeatmap.getBPM());
+        System.out.println("BeatmapURL        : " + lookupBeatmap.getUrl());
+
+        System.out.println("----------------------------");
     }
 }

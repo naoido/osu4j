@@ -3,13 +3,15 @@ package com.naoido.osu4j;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naoido.osu4j.api.ApiRequest;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class OsuApiClient extends ApiRequest {
     public static final String API_BASE_URL = "https://osu.ppy.sh/api/v2";
+
 
     public OsuApiClient(String token) {
         super(token);
