@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naoido.osu4j.model.beatmap.Attribute;
 import com.naoido.osu4j.model.beatmap.Beatmap;
 import com.naoido.osu4j.model.beatmap.Mode;
+import com.naoido.osu4j.model.beatmap.discussion.Discussion;
 import com.naoido.osu4j.model.user.Score;
 import com.naoido.osu4j.model.user.User;
 import com.naoido.osu4j.model.user.UserBeatmapScore;
@@ -129,16 +130,39 @@ public class ApiRequest implements Beatmaps, Users{
         return this.getBeatmap(String.valueOf(beatmapId));
     }
 
-    public Attribute getAttributes(String beatmapId) throws JsonProcessingException {
+    public Attribute getAttributes(String beatmapId, Parameter... params) throws JsonProcessingException {
         this.endPoint = "/beatmaps/" + beatmapId + "/attributes";
-        this.response = this.getApiResponse(this.endPoint, RequestMethod.POST);
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.POST, params);
         System.out.println(response);
 
         return new ObjectMapper().readValue(this.response, Attribute.Attributes.class).getAttribute();
     }
 
-    public Attribute getAttributes(int beatmapId) throws JsonProcessingException {
-        return this.getAttributes(String.valueOf(beatmapId));
+    public Attribute getAttributes(int beatmapId, Parameter... params) throws JsonProcessingException {
+        return this.getAttributes(String.valueOf(beatmapId), params);
+    }
+
+    public Discussion.Discussions getDiscussionPosts(Parameter... params) throws JsonProcessingException {
+        this.endPoint = "/beatmapsets/discussions/posts";
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, params);
+
+        return new ObjectMapper().readValue(this.response, Discussion.Discussions.class);
+    }
+
+    public Discussion.Discussions getDiscussionVotes(Parameter... params) throws JsonProcessingException {
+        this.endPoint = "/beatmapsets/discussions/votes";
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, params);
+
+        return new ObjectMapper().readValue(this.response, Discussion.Discussions.class);
+    }
+
+    public Discussion.Discussions getDiscussions(Parameter... params) throws JsonProcessingException {
+        this.endPoint = "/beatmapsets/discussions";
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, params);
+
+        System.out.println(response);
+
+        return new ObjectMapper().readValue(this.response, Discussion.Discussions.class);
     }
 
     public User getUser(String userName, Mode mode) throws JsonProcessingException {
@@ -159,5 +183,7 @@ public class ApiRequest implements Beatmaps, Users{
     public User getUser(int userId) throws JsonProcessingException {
         return getUser(String.valueOf(userId), null);
     }
+
+
 }
 
