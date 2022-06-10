@@ -9,7 +9,7 @@ import com.naoido.osu4j.util.Parameter;
 
 import java.util.List;
 
-public interface Beatmaps {
+public interface Beatmaps extends Discussions {
     //beatmaps/lookup?{checksum? filename? id?}
     Beatmap getLookupBeatmap(Parameter... params) throws JsonProcessingException;
 
@@ -29,5 +29,5 @@ public interface Beatmaps {
     Beatmap getBeatmap(String beatmapId) throws JsonProcessingException;
 
     //beatmaps/{beatmap}/attributes
-    Attribute getAttributes(String beatmapId) throws JsonProcessingException;
+    Attribute getAttributes(String beatmapId, Parameter... params) throws JsonProcessingException;
 }

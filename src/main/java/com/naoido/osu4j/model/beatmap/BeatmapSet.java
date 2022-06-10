@@ -2,7 +2,7 @@ package com.naoido.osu4j.model.beatmap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BeatmapSet {
+public class Beatmapset {
     private String artist;
     @JsonProperty("artist_unicode")
     private String artistUnicode;
@@ -10,7 +10,7 @@ public class BeatmapSet {
     private String creator;
     @JsonProperty("favourite_count")
     private int favouriteCount;
-    private String hype;
+    private Hype hype;
     private int id;
     private boolean nsfw;
     private double offset;
@@ -57,7 +57,7 @@ public class BeatmapSet {
     private int[] ratings;
 
 
-    public BeatmapSet() {}
+    public Beatmapset() {}
 
     public String getArtist() {
         return this.artist;
@@ -79,7 +79,7 @@ public class BeatmapSet {
         return this.favouriteCount;
     }
 
-    public String getHype() {
+    public Hype getHype() {
         return this.hype;
     }
 
@@ -100,7 +100,7 @@ public class BeatmapSet {
     }
 
     public String getPreviewUrl() {
-        return this.previewUrl;
+        return "https:" + this.previewUrl;
     }
 
     public String getSource() {

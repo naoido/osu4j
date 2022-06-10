@@ -3,7 +3,7 @@ package com.naoido.example.get.beatmap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.naoido.osu4j.OsuApiClient;
 import com.naoido.osu4j.model.beatmap.Beatmap;
-import com.naoido.osu4j.model.beatmap.BeatmapSet;
+import com.naoido.osu4j.model.beatmap.Beatmapset;
 import com.naoido.osu4j.util.Parameter;
 
 import java.util.List;
@@ -17,7 +17,7 @@ class GetBeatmap {
         //Build OsuApiClient
         OsuApiClient osuApiClient = new OsuApiClient.Builder(CLIENT_ID, CLIENT_SECRET).build();
 
-        int beatmapId = 598885;
+        int beatmapId = 592367;
 
         //GET(https://osu.ppy.sh/api/v2/beatmaps/{beatmap})
         Beatmap beatmap = osuApiClient.getBeatmap(beatmapId);
@@ -28,7 +28,7 @@ class GetBeatmap {
         System.out.println("----------------------------");
 
 
-        BeatmapSet beatmapSet = beatmap.getBeatmapSet();
+        Beatmapset beatmapSet = beatmap.getBeatmapSet();
 
         System.out.println("Title      :   " + beatmapSet.getTitleUnicode());
         System.out.println("Creator    :   " + beatmapSet.getCreator());
@@ -60,7 +60,7 @@ class GetBeatmaps {
         System.out.println("----------------------------");
 
         for (Beatmap beatmap: beatmaps) {
-            BeatmapSet beatmapSet = beatmap.getBeatmapSet();
+            Beatmapset beatmapSet = beatmap.getBeatmapSet();
 
             System.out.println("Title      :   " + beatmapSet.getTitleUnicode());
             System.out.println("Creator    :   " + beatmapSet.getCreator());

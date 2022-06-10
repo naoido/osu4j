@@ -19,7 +19,7 @@ class GetUser {
 
         String userName = "Naoido";
 
-        //GET(https://osu.ppy.sh/api/v2/users/{userID})
+        //GET(https://osu.ppy.sh/api/v2/users/{userID}/{mode?})
         User user = osuApiClient.getUser(userName, Mode.OSU);
         Statistics statistics = user.getStatistics();
 

@@ -3,7 +3,7 @@ package com.naoido.example.get.beatmap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.naoido.osu4j.OsuApiClient;
 import com.naoido.osu4j.model.beatmap.Beatmap;
-import com.naoido.osu4j.model.beatmap.BeatmapSet;
+import com.naoido.osu4j.model.beatmap.Beatmapset;
 import com.naoido.osu4j.util.Parameter;
 
 import static com.naoido.example.Client.CLIENT_ID;
@@ -17,7 +17,7 @@ public class GetLookupBeatmap {
 
         //GET(https://osu.ppy.sh/api/v2/beatmaps/lookup?{checksum? filename? id?})
         Beatmap lookupBeatmap = osuApiClient.getLookupBeatmap(Parameter.of("id", 1033882));
-        BeatmapSet beatmapSet = lookupBeatmap.getBeatmapSet();
+        Beatmapset beatmapSet = lookupBeatmap.getBeatmapSet();
 
         System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());

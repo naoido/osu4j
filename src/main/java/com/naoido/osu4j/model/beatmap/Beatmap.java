@@ -8,7 +8,7 @@ public class Beatmap {
     @JsonProperty("beatmapset_id")
     private long beatmapSetID;
     @JsonProperty("beatmapset")
-    private BeatmapSet beatmapSet;
+    private Beatmapset beatmapSet;
     @JsonProperty("difficulty_rating")
     private double difficultyRating;
     private long id;
@@ -69,8 +69,8 @@ public class Beatmap {
         return this.id;
     }
 
-    public String getMode() {
-        return this.mode;
+    public Mode getMode() {
+        return Mode.getMode(this.mode);
     }
 
     public String getStatus() {
@@ -165,7 +165,7 @@ public class Beatmap {
         return this.checksum;
     }
 
-    public BeatmapSet getBeatmapSet() {
+    public Beatmapset getBeatmapSet() {
         return this.beatmapSet;
     }
 
