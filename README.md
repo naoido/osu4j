@@ -73,7 +73,7 @@ System.out.println("----------------------------");
 
 //Print grade counts
 for (Map.Entry<String, Integer> rank : statistics.getGradeCounts().getTreeMap().entrySet()) {
-System.out.println(String.format("%-12s", rank.getKey()) + ": " + rank.getValue());
+    System.out.println(String.format("%-12s", rank.getKey()) + ": " + rank.getValue());
 }
 
 System.out.println("----------------------------");
@@ -113,15 +113,15 @@ System.out.println("Response: " + osuApiClient.getResponse());
 System.out.println("----------------------------");
 
 for (Score userScore: userScores) {
-User user = userScore.getUser();
-
-System.out.println("UserName : " + user.getUserName());
-System.out.println("Accuracy : " + userScore.getAccuracy() + "%");
-System.out.println("Score    : " + userScore.getScore());
-System.out.println("Rank     : " + userScore.getRank());
-System.out.println("PP       : " + userScore.getPerformancePoint());;
-
-System.out.println("----------------------------");
+    User user = userScore.getUser();
+    
+    System.out.println("UserName : " + user.getUserName());
+    System.out.println("Accuracy : " + userScore.getAccuracy() + "%");
+    System.out.println("Score    : " + userScore.getScore());
+    System.out.println("Rank     : " + userScore.getRank());
+    System.out.println("PP       : " + userScore.getPerformancePoint());;
+    
+    System.out.println("----------------------------");
 }
 ```
 output
