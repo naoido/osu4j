@@ -10,4 +10,11 @@ public enum Mode {
     public String toString() {
         return this.name().toLowerCase();
     }
+
+    public static Mode getMode(String mode) {
+        for (Mode m: Mode.values()) {
+            if (m.toString().equals(mode)) return m;
+        }
+        return null;
+    }
 }
