@@ -2,7 +2,12 @@ package com.naoido.osu4j.api;
 
 public enum RequestMethod {
     GET,
-    POST;
+    POST,
+    PUT,
+    PATCH,
+    DELETE,
+    OPTIONS,
+    HEAD;
 
     @Override
     public String toString() {
