@@ -6,6 +6,9 @@ import com.naoido.osu4j.model.beatmap.Attribute;
 import com.naoido.osu4j.model.beatmap.Beatmap;
 import com.naoido.osu4j.model.beatmap.Mode;
 import com.naoido.osu4j.model.beatmap.discussion.Discussion;
+import com.naoido.osu4j.model.changelog.ChangeLog;
+import com.naoido.osu4j.model.changelog.ChangeLogList;
+import com.naoido.osu4j.model.changelog.StreamType;
 import com.naoido.osu4j.model.user.Score;
 import com.naoido.osu4j.model.user.User;
 import com.naoido.osu4j.model.user.UserBeatmapScore;
@@ -21,7 +24,7 @@ import java.util.List;
 
 import static com.naoido.osu4j.OsuApiClient.API_BASE_URL;
 
-public class ApiRequest implements Beatmaps, Users{
+public class ApiRequest implements Beatmaps, Users, ChangeLogs {
     protected final String token;
     protected String response;
     protected String endPoint;
@@ -184,6 +187,26 @@ public class ApiRequest implements Beatmaps, Users{
         return getUser(String.valueOf(userId), null);
     }
 
+    public ChangeLog getChangeLog(StreamType type, String version) throws JsonProcessingException {
+        this.endPoint = "/changelog/" + type + "/" + version;
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET);
 
+        return new ObjectMapper().readValue(this.response, ChangeLog.class);
+    }
+
+
+    public ChangeLogList getChangeLogList(Parameter... params) throws JsonProcessingException {
+        this.endPoint = "/changelog";
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, params);
+
+        return new ObjectMapper().readValue(this.response, ChangeLogList.class);
+    }
+
+    public ChangeLog getLookupChangeList(String version, Parameter... params) throws JsonProcessingException {
+        this.endPoint = "/changelog/" + version;
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, params);
+
+        return new ObjectMapper().readValue(this.response, ChangeLog.class);
+    }
 }
 

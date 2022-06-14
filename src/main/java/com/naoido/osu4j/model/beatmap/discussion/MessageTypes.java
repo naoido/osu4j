@@ -15,7 +15,7 @@ public enum MessageTypes {
 
     public static MessageTypes getMessageTypes(String type) {
         for (MessageTypes messageTypes: MessageTypes.values()) {
-            if (messageTypes.toString().equals(type)) return messageTypes;
+            if (messageTypes.name().equalsIgnoreCase(type)) return messageTypes;
         }
         return null;
     }

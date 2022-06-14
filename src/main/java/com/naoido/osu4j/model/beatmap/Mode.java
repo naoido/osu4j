@@ -11,9 +11,9 @@ public enum Mode {
         return this.name().toLowerCase();
     }
 
-    public static Mode getMode(String mode) {
-        for (Mode m: Mode.values()) {
-            if (m.toString().equals(mode)) return m;
+    public static Mode getMode(String modeName) {
+        for (Mode mode: Mode.values()) {
+            if (mode.name().equalsIgnoreCase(modeName)) return mode;
         }
         return null;
     }
