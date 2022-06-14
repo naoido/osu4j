@@ -25,13 +25,13 @@ import java.util.List;
 import static com.naoido.osu4j.OsuApiClient.API_BASE_URL;
 
 public class ApiRequest implements Beatmaps, Users, ChangeLogs {
-    protected final String token;
+    protected String token;
     protected String response;
     protected String endPoint;
 
     public ApiRequest(String token) { this.token = "Bearer " + token; }
 
-    public String getApiResponse(String endPoint, RequestMethod method, Parameter... params) {
+    public String getApiResponse(String endPoint, RequestMethod method,boolean returnResponse, Parameter... params) {
         StringBuilder uri = (new StringBuilder()).append(API_BASE_URL).append(endPoint);
         if (params.length > 0) {
             if (!(params.length == 1 && params[0] == null)) {
@@ -52,10 +52,18 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
             connection.setRequestProperty("Content-Type", "application/json; charset=" + StandardCharsets.UTF_8);
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", this.token);
+
+            this.response = "";
+            if (!returnResponse) return "";
+
             return getOutput(connection);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getApiResponse(String endPoint, RequestMethod method, Parameter... params) {
+        return this.getApiResponse(endPoint, method, true, params);
     }
 
     public static String getOutput(HttpURLConnection connection) throws IOException {
