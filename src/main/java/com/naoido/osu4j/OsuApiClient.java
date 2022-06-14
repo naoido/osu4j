@@ -2,6 +2,7 @@ package com.naoido.osu4j;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naoido.osu4j.api.ApiRequest;
+import com.naoido.osu4j.api.RequestMethod;
 
 import java.io.BufferedOutputStream;
 import java.io.OutputStreamWriter;
@@ -11,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 
 public class OsuApiClient extends ApiRequest {
     public static final String API_BASE_URL = "https://osu.ppy.sh/api/v2";
-
 
     public OsuApiClient(String token) {
         super(token);
@@ -27,6 +27,12 @@ public class OsuApiClient extends ApiRequest {
 
     public String getToken() { return this.token; }
 
+    public void revokeToken() {
+        this.token = null;
+        this.endPoint = "/oauth/tokens/current";
+
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.DELETE, false);
+    }
 
     public static class Builder {
         public static final String TOKEN_URL = "https://osu.ppy.sh/oauth/token";
