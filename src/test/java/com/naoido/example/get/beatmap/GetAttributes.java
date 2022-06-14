@@ -3,6 +3,9 @@ package com.naoido.example.get.beatmap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.naoido.osu4j.OsuApiClient;
 import com.naoido.osu4j.model.beatmap.Attribute;
+import com.naoido.osu4j.model.mods.Mod;
+import com.naoido.osu4j.model.mods.Mods;
+import com.naoido.osu4j.util.RequestBody;
 
 import static com.naoido.example.Client.CLIENT_ID;
 import static com.naoido.example.Client.CLIENT_SECRET;
@@ -13,10 +16,14 @@ public class GetAttributes {
         //Build OsuApiClient
         OsuApiClient osuApiClient = new OsuApiClient.Builder(CLIENT_ID, CLIENT_SECRET).build();
 
-        int beatmapId = 592367;
+        int beatmapId = 2480902;
+        int bitset = Mods.getBitSet(Mod.DOUBLE_TIME, Mod.HIDDEN);
+        String body = new RequestBody().add("mods", bitset).add("ruleset", "osu").toString();
 
-        //beatmaps/{beatmap}/attributes?{mods? result? ruleset_id?}
-        Attribute attribute = osuApiClient.getAttributes(beatmapId);
+        System.out.println(body);
+
+        //beatmaps/{beatmap}/attributes
+        Attribute attribute = osuApiClient.getAttributes(beatmapId, body);
 
         System.out.println("----------------------------");
         System.out.println("EndPoint: " + osuApiClient.getEndPoint());
