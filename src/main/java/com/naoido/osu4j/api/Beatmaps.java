@@ -29,5 +29,5 @@ public interface Beatmaps extends Discussions {
     Beatmap getBeatmap(String beatmapId) throws JsonProcessingException;
 
     //beatmaps/{beatmap}/attributes
-    Attribute getAttributes(String beatmapId, Parameter... params) throws JsonProcessingException;
+    Attribute getAttributes(String beatmapId, String body) throws JsonProcessingException;
 }

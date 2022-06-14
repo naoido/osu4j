@@ -14,9 +14,11 @@ import com.naoido.osu4j.model.user.User;
 import com.naoido.osu4j.model.user.UserBeatmapScore;
 import com.naoido.osu4j.util.Parameter;
 
+import java.awt.print.PrinterAbortException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -31,7 +33,7 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
 
     public ApiRequest(String token) { this.token = "Bearer " + token; }
 
-    public String getApiResponse(String endPoint, RequestMethod method,boolean returnResponse, Parameter... params) {
+    public String getApiResponse(String endPoint, RequestMethod method, boolean returnResponse, String body, Parameter... params) {
         StringBuilder uri = (new StringBuilder()).append(API_BASE_URL).append(endPoint);
         if (params.length > 0) {
             if (!(params.length == 1 && params[0] == null)) {
@@ -52,18 +54,36 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
             connection.setRequestProperty("Content-Type", "application/json; charset=" + StandardCharsets.UTF_8);
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", this.token);
+            connection.setDoOutput(true);
+
+            if (body != null) {
+                System.out.println("!");
+                OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream());
+                output.write(body);
+                output.flush();
+                connection.connect();
+            }
 
             this.response = "";
             if (!returnResponse) return "";
 
             return getOutput(connection);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public String getApiResponse(String endPoint, RequestMethod method, Parameter... params) {
-        return this.getApiResponse(endPoint, method, true, params);
+        return this.getApiResponse(endPoint, method, true, null, params);
+    }
+
+    public String getApiResponse(String endPoint, RequestMethod method, boolean returnResponse, Parameter... params) {
+        return this.getApiResponse(endPoint, method, returnResponse, null, params);
+    }
+
+    public String getApiResponse(String endPoint, RequestMethod method, String body, Parameter... params) {
+        return this.getApiResponse(endPoint, method, true, body, params);
     }
 
     public static String getOutput(HttpURLConnection connection) throws IOException {
@@ -141,16 +161,24 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
         return this.getBeatmap(String.valueOf(beatmapId));
     }
 
-    public Attribute getAttributes(String beatmapId, Parameter... params) throws JsonProcessingException {
+    public Attribute getAttributes(String beatmapId, String body) throws JsonProcessingException {
         this.endPoint = "/beatmaps/" + beatmapId + "/attributes";
-        this.response = this.getApiResponse(this.endPoint, RequestMethod.POST, params);
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.POST, body);
         System.out.println(response);
 
         return new ObjectMapper().readValue(this.response, Attribute.Attributes.class).getAttribute();
     }
 
-    public Attribute getAttributes(int beatmapId, Parameter... params) throws JsonProcessingException {
-        return this.getAttributes(String.valueOf(beatmapId), params);
+    public Attribute getAttributes(String beatmapId) throws JsonProcessingException {
+        return this.getAttributes(beatmapId, null);
+    }
+
+    public Attribute getAttributes(int beatmapId) throws JsonProcessingException {
+        return this.getAttributes(String.valueOf(beatmapId), null);
+    }
+
+    public Attribute getAttributes(int beatmapId, String body) throws JsonProcessingException {
+        return this.getAttributes(String.valueOf(beatmapId), body);
     }
 
     public Discussion.Discussions getDiscussionPosts(Parameter... params) throws JsonProcessingException {
