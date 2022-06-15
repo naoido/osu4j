@@ -2,7 +2,7 @@ package com.naoido.osu4j.model.mods;
 
 public class Mods {
     public static int getBitSet(Mod... mods) {
-        int bitset = 0;
+        int bitset;
         long bit = 0;
 
         for (Mod mod: mods) {

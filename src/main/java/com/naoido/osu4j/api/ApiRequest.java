@@ -13,8 +13,8 @@ import com.naoido.osu4j.model.user.Score;
 import com.naoido.osu4j.model.user.User;
 import com.naoido.osu4j.model.user.UserBeatmapScore;
 import com.naoido.osu4j.util.Parameter;
+import com.naoido.osu4j.util.RequestBody;
 
-import java.awt.print.PrinterAbortException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,7 +57,6 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
             connection.setDoOutput(true);
 
             if (body != null) {
-                System.out.println("!");
                 OutputStreamWriter output = new OutputStreamWriter(connection.getOutputStream());
                 output.write(body);
                 output.flush();
@@ -170,15 +169,23 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
     }
 
     public Attribute getAttributes(String beatmapId) throws JsonProcessingException {
-        return this.getAttributes(beatmapId, null);
+        return this.getAttributes(beatmapId, (String) null);
     }
 
     public Attribute getAttributes(int beatmapId) throws JsonProcessingException {
-        return this.getAttributes(String.valueOf(beatmapId), null);
+        return this.getAttributes(String.valueOf(beatmapId), (String) null);
     }
 
     public Attribute getAttributes(int beatmapId, String body) throws JsonProcessingException {
         return this.getAttributes(String.valueOf(beatmapId), body);
+    }
+
+    public Attribute getAttributes(int beatmapId, RequestBody body) throws JsonProcessingException {
+        return this.getAttributes(String.valueOf(beatmapId), body.toString());
+    }
+
+    public Attribute getAttributes(String beatmapId, RequestBody body) throws JsonProcessingException {
+        return this.getAttributes(beatmapId, body.toString());
     }
 
     public Discussion.Discussions getDiscussionPosts(Parameter... params) throws JsonProcessingException {
@@ -204,23 +211,23 @@ public class ApiRequest implements Beatmaps, Users, ChangeLogs {
         return new ObjectMapper().readValue(this.response, Discussion.Discussions.class);
     }
 
-    public User getUser(String userName, Mode mode) throws JsonProcessingException {
+    public User getUser(String userName, Mode mode, Parameter... params) throws JsonProcessingException {
         this.endPoint = "/users/" + userName + (mode == null? "" : "/" + mode);
-        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET);
+        this.response = this.getApiResponse(this.endPoint, RequestMethod.GET, true, params);
 
         return new ObjectMapper().readValue(this.response, User.class);
     }
 
-    public User getUser(int userId, Mode mode) throws JsonProcessingException {
-        return getUser(String.valueOf(userId), mode);
+    public User getUser(int userId, Mode mode, Parameter... params) throws JsonProcessingException {
+        return getUser(String.valueOf(userId), mode, params);
     }
 
-    public User getUser(String userName) throws JsonProcessingException {
-        return this.getUser(userName, null);
+    public User getUser(String userName, Parameter... params) throws JsonProcessingException {
+        return this.getUser(userName, null, params);
     }
 
-    public User getUser(int userId) throws JsonProcessingException {
-        return getUser(String.valueOf(userId), null);
+    public User getUser(int userId, Parameter... params) throws JsonProcessingException {
+        return getUser(String.valueOf(userId), null, params);
     }
 
     public ChangeLog getChangeLog(StreamType type, String version) throws JsonProcessingException {

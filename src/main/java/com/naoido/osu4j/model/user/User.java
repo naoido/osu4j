@@ -14,6 +14,7 @@ public class User {
     private String countryCode;
     @JsonProperty("default_group")
     private String defaultGroup;
+    @JsonProperty("id")
     private long id;
     @JsonProperty("is_active")
     private boolean active;
@@ -45,11 +46,13 @@ public class User {
     private String joinDate;
     @JsonProperty("kudosu")
     private Kudosu kudosu;
+    @JsonProperty("location")
     private String location;
     @JsonProperty("max_blocks")
     private int maxBlocks;
     @JsonProperty("max_friends")
     private int maxFriends;
+    @JsonProperty("occupation")
     private String occupation;
     @JsonProperty("playmode")
     private String playMode;
@@ -59,12 +62,17 @@ public class User {
     private int postCount;
     @JsonProperty("profile_order")
     private String[] profileOrder;
+    @JsonProperty("titel")
     private String title;
     @JsonProperty("title_url")
     private String titleUrl;
+    @JsonProperty("twitter")
     private String twitter;
+    @JsonProperty("website")
     private String website;
+    @JsonProperty("country")
     private Country country;
+    @JsonProperty("cover")
     private Cover cover;
     @JsonProperty("is_restricted")
     private boolean restricted;
@@ -72,6 +80,7 @@ public class User {
     private String[] accountHistory;
     @JsonProperty("active_tournament_banner")
     private String activeTournamentBanner;
+    @JsonProperty("badges")
     private List<Badge> badges;
     @JsonProperty("favourite_beatmapset_count")
     private int favouriteBeatmapSetCount;
@@ -80,7 +89,7 @@ public class User {
     @JsonProperty("graveyard_beatmapset_count")
     private int graveyardBeatmapSetCount;
     @JsonProperty("beatmap_playcounts_count")
-    private int count;
+    private int beatmapPlayCount;
     @JsonProperty("comments_count")
     private int commentsCount;
     @JsonProperty("guest_beatmapset_count")
@@ -92,6 +101,7 @@ public class User {
     private int lovedBeatmapSetCount;
     @JsonProperty("monthly_playcounts")
     private List<Count> monthlyPlayCount;
+    @JsonProperty("page")
     private Page page;
     @JsonProperty("previous_usernames")
     private String[] previousUserNames;
@@ -111,6 +121,7 @@ public class User {
     private int scoresPinnedCount;
     @JsonProperty("scores_recent_count")
     private int scoresRecentCount;
+    @JsonProperty("statistics")
     private Statistics statistics;
     @JsonProperty("support_level")
     private int supportLevel;
@@ -338,8 +349,8 @@ public class User {
         return this.prevopisUserNames;
     }
 
-    public int getCount() {
-        return this.count;
+    public int getBeatmapPlayCount() {
+        return this.beatmapPlayCount;
     }
 
     public int getCommentsCount() {
